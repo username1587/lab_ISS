@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls','javafx.fxml' ]
+}
+
+dependencies {
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.16.1'
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // JAX-B dependencies for JDK 9+ (pt hibernate)
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+
+    // pt javafx
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: '17-ea+3'
+
+}
+mainClassName='gui.Main'

@@ -1,2 +1,6 @@
-package models;public enum TipUser {
+package models;
+
+public enum TipUser {
+    PROGRAMATOR,
+    VERIFICATOR
 }

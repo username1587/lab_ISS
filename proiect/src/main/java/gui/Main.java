@@ -1,2 +1,7 @@
-package gui;public class Main {
+package gui;
+
+public class Main {
+    public static void main(String[] args) {
+        MainFx.main(args);
+    }
 }

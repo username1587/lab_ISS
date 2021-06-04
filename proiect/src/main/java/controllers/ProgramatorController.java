@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -14,7 +15,7 @@ import services.Service;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserController {
+public class ProgramatorController {
     Service service;
     User user;
 
@@ -54,7 +55,7 @@ public class UserController {
     private TableColumn<Bug, Boolean> isActiveColumn;
 
     private void loadBugsModel() {
-        List<Bug> bugs = service.getBugs();
+        List<Bug> bugs = service.getActiveBugs();
         bugsModel.setAll(bugs);
     }
 
@@ -63,4 +64,11 @@ public class UserController {
 
     @FXML
     private Label rolLabel;
+
+    @FXML
+    void solveBugOnAction(ActionEvent event) {
+        Bug selectedBug=table.getSelectionModel().getSelectedItem();
+        service.solveBug(selectedBug);
+        loadBugsModel();
+    }
 }

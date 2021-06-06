@@ -5,6 +5,8 @@ public class Bug {
     private String denumire;
     private String descriere;
     private Integer id;
+    private User createdBy;
+    private User solvedBy;
 
     public Bug() {
     }
@@ -39,5 +41,33 @@ public class Bug {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public User getSolvedBy() {
+        return solvedBy;
+    }
+
+    public void setSolvedBy(User solvedBy) {
+        this.solvedBy = solvedBy;
+    }
+
+    @Override
+    public String toString() {
+        return "Bug{" +
+                "isActive=" + isActive +
+                ", denumire='" + denumire + '\'' +
+                ", descriere='" + descriere + '\'' +
+                ", id=" + id +
+                ", createdBy=" + createdBy +
+                ", solvedBy=" + solvedBy +
+                '}';
     }
 }

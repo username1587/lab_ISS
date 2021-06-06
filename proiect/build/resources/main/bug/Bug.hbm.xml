@@ -17,5 +17,12 @@
         <property
                 name="isActive"
                 column="isActive"/>
+        <many-to-one
+                name="createdBy"
+                column="createdBy"/>
+
+        <many-to-one
+                name="solvedBy"
+                column="solvedBy"/>
     </class>
 </hibernate-mapping>

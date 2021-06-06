@@ -20,5 +20,6 @@
                 <param name="enumClass">models.TipUser</param>
             </type>
         </property>
+
     </class>
 </hibernate-mapping>

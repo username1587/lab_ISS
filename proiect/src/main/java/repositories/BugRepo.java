@@ -25,7 +25,7 @@ public class BugRepo implements IBugRepo {
                 tx = session.beginTransaction();
                 bugs = session.createQuery("from Bug as m", Bug.class).
 //                        setFirstResult(10).setMaxResults(5).
-                        list();
+        list();
                 tx.commit();
             } catch (RuntimeException ex) {
                 if (tx != null)
@@ -67,26 +67,30 @@ public class BugRepo implements IBugRepo {
                     tx.rollback();
             }
         }
+//        System.out.println("Am adaugat Bug=" + bug.toString());
     }
 
     @Override
     public void solveBug(Bug bug) {
-        try(Session session = sessionFactory.openSession()){
-            Transaction tx=null;
-            try{
+        try (Session session = sessionFactory.openSession()) {
+            Transaction tx = null;
+            try {
                 tx = session.beginTransaction();
-                Bug _bug = session.load( Bug.class, bug.getId() );
+                Bug _bug = session.load(Bug.class, bug.getId());
 
                 _bug.setIsActive(false);
+
+                _bug.setSolvedBy(bug.getSolvedBy());
 
                 //session.update(_bug);
                 tx.commit();
 
-            } catch(RuntimeException ex){
-                if (tx!=null)
+            } catch (RuntimeException ex) {
+                if (tx != null)
                     tx.rollback();
             }
         }
+//        System.out.println("Am rezolvat Bug=" + bug.toString());
     }
 
 }

@@ -11,11 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Bug;
 import models.User;
+import observer.Observer;
 import services.Service;
 
 import java.util.List;
 
-public class VerificatorController {
+public class VerificatorController implements Observer {
     Service service;
     User user;
 
@@ -37,6 +38,8 @@ public class VerificatorController {
         usernameLabel.setText(user.getUsername());
         rolLabel.setText(user.getTipUser().toString());
         loadBugsModel();
+
+        service.addObserver(this);
     }
 
     ObservableList<Bug> bugsModel = FXCollections.observableArrayList();
@@ -72,14 +75,18 @@ public class VerificatorController {
 
     @FXML
     void adaugaBugButtonOnAction(ActionEvent event) {
-        Bug bug=new Bug();
-        String numeBug=numeBugTextfield.getText();
-        String descriereBug=descriereBugTextfield.getText();
+        Bug bug = new Bug();
+        String numeBug = numeBugTextfield.getText();
+        String descriereBug = descriereBugTextfield.getText();
         bug.setDenumire(numeBug);
         bug.setDescriere(descriereBug);
         bug.setIsActive(true);
+        bug.setCreatedBy(user);
         service.addBug(bug);
+    }
 
+    @Override
+    public void update() {
         loadBugsModel();
     }
 }

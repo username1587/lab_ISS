@@ -10,12 +10,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Bug;
 import models.User;
+import observer.Observable;
+import observer.Observer;
 import services.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ProgramatorController {
+public class ProgramatorController implements Observer {
     Service service;
     User user;
 
@@ -38,6 +40,8 @@ public class ProgramatorController {
         usernameLabel.setText(user.getUsername());
         rolLabel.setText(user.getTipUser().toString());
         loadBugsModel();
+
+        service.addObserver(this);
     }
 
     ObservableList<Bug> bugsModel = FXCollections.observableArrayList();
@@ -67,8 +71,13 @@ public class ProgramatorController {
 
     @FXML
     void solveBugOnAction(ActionEvent event) {
-        Bug selectedBug=table.getSelectionModel().getSelectedItem();
-        service.solveBug(selectedBug);
+        Bug selectedBug = table.getSelectionModel().getSelectedItem();
+        service.solveBug(selectedBug,user);
+//        loadBugsModel();
+    }
+
+    @Override
+    public void update() {
         loadBugsModel();
     }
 }
